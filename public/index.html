@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Firebase Push Demo</title>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-messaging.js"></script>
+  <style>
+    :root {
+      --primary: #6c5ce7;  /* Purple */
+      --secondary: #00cec9;  /* Teal */
+      --accent: #fd79a8;  /* Pink */
+      --dark: #2d3436;  /* Dark gray */
+      --light: #f5f6fa;  /* Off-white */
+      --success: #00b894;  /* Green */
+      --error: #d63031;  /* Red */
+      --border-radius: 12px;
+      --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--dark);
+      color: var(--light);
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 500px;
+      background: rgba(45, 52, 54, 0.8);
+      backdrop-filter: blur(10px);
+      border-radius: var(--border-radius);
+      padding: 2rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    h1 {
+      color: var(--primary);
+      text-align: center;
+      margin-bottom: 1.5rem;
+      font-weight: 600;
+      font-size: 2rem;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    h2 {
+      color: var(--secondary);
+      margin-top: 0;
+      font-size: 1.3rem;
+      font-weight: 500;
+    }
+
+    #requestPermission {
+      width: 100%;
+      padding: 12px;
+      background: linear-gradient(135deg, var(--primary), #a29bfe);
+      color: white;
+      border: none;
+      border-radius: var(--border-radius);
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      box-shadow: 0 4px 15px rgba(108, 92, 231, 0.4);
+      margin-bottom: 1.5rem;
+    }
+
+    #requestPermission:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(108, 92, 231, 0.6);
+    }
+
+    .notification-panel {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: var(--border-radius);
+      padding: 1.5rem;
+      margin-top: 1.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: var(--border-radius);
+      color: var(--light);
+      font-size: 1rem;
+      transition: var(--transition);
+    }
+
+    input::placeholder, textarea::placeholder {
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: var(--secondary);
+      box-shadow: 0 0 0 3px rgba(0, 206, 201, 0.2);
+    }
+
+    #sendNotification {
+      width: 100%;
+      padding: 12px;
+      background: linear-gradient(135deg, var(--secondary), #55efc4);
+      color: var(--dark);
+      border: none;
+      border-radius: var(--border-radius);
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      box-shadow: 0 4px 15px rgba(0, 206, 201, 0.4);
+    }
+
+    #sendNotification:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 206, 201, 0.6);
+    }
+
+    #statusMessage {
+      margin-top: 1rem;
+      padding: 10px;
+      border-radius: var(--border-radius);
+      text-align: center;
+      font-weight: 500;
+      display: none;
+    }
+
+    .success {
+      background: rgba(0, 184, 148, 0.2);
+      color: var(--success);
+      border: 1px solid var(--success);
+      display: block;
+    }
+
+    .error {
+      background: rgba(214, 48, 49, 0.2);
+      color: var(--error);
+      border: 1px solid var(--error);
+      display: block;
+    }
+
+    /* Glow effect for futuristic feel */
+    .container:hover {
+      box-shadow: 0 0 20px rgba(108, 92, 231, 0.3);
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <h1>Firebase Push Demo</h1>
+    
+    <button id="requestPermission">🔔 Enable Notifications</button>
+    
+    <div class="notification-panel">
+      <h2>Test Notification</h2>
+      <input type="text" id="notificationTitle" placeholder="Notification Title">
+      <textarea id="notificationBody" placeholder="Enter your message..." rows="4"></textarea>
+      <button id="sendNotification">🚀 Send Notification</button>
+      <div id="statusMessage"></div>
+    </div>
+  </div>
+
+  <script src="client.js"></script>
+</body>
+</html>
